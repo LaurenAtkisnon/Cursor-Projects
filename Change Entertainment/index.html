@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Entertainment - Where Entertainment brings Change</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&family=Fascinate&display=swap" rel="stylesheet">
+    <style>
+:root {
+    --deep-charcoal: #111111;
+    --off-white: #f5f5f5;
+    --muted-gold: #bfa06a;
+    --gold-glow: rgba(191, 160, 106, 0.15);
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+    --space-xl: 6rem;
+    --max-width: 1400px;
+    --border-radius: 8px;
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+    font-family: var(--font-body);
+    background-color: var(--deep-charcoal);
+    color: var(--off-white);
+    line-height: 1.6;
+    font-weight: 300;
+}
+a { color: inherit; text-decoration: none; }
+
+.fascinate-regular { font-family: "Fascinate", system-ui; font-weight: 400; }
+
+/* HEADER */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(191, 160, 106, 0.1);
+}
+.header-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-md) var(--space-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+.logo-section { flex: 1; min-width: 250px; }
+.label-name {
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+    background: linear-gradient(135deg, var(--off-white) 0%, var(--muted-gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.tagline {
+    font-size: 0.875rem;
+    color: var(--muted-gold);
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+.nav { display: flex; gap: var(--space-md); }
+.nav-link {
+    font-size: 0.95rem;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: var(--transition-smooth);
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--muted-gold);
+    transition: var(--transition-smooth);
+}
+.nav-link:hover { color: var(--muted-gold); }
+.nav-link:hover::after { width: 100%; }
+
+/* HERO */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 50vh; /* adjust height as needed */
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--deep-charcoal); /* fallback if video doesn't load */
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+    animation: float 8s ease-in-out infinite;
+    opacity: 0.6;
+    z-index: 1;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.1); }
+}
+
+/* SECTIONS */
+.section { padding: var(--space-xl) var(--space-sm); }
+.container { max-width: var(--max-width); margin: 0 auto; }
+.section-title {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    letter-spacing: 1px;
+}
+.section-intro {
+    text-align: center;
+    color: rgba(245, 245, 245, 0.8);
+    font-size: 1rem;
+    margin: -1rem auto var(--space-md);
+    max-width: 36rem;
+}
+
+/* RELEASES */
+.releases-section {
+    background: linear-gradient(to bottom, transparent 0%, rgba(191, 160, 106, 0.03) 50%, transparent 100%);
+}
+.releases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: var(--space-lg);
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* FLIP CARDS - SIMPLIFIED */
+.release-flip-card {
+    aspect-ratio: 1 / 1;
+    perspective: 1000px;
+    cursor: pointer;
+}
+.release-flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s;
+    transform-style: preserve-3d;
+}
+.release-flip-card:hover .release-flip-inner {
+    transform: rotateY(180deg);
+}
+.release-flip-front,
+.release-flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--border-radius);
+}
+.release-flip-front {
+    background-size: cover;
+    background-position: center;
+}
+.release-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(17, 17, 17, 0.85) 0%, rgba(17, 17, 17, 0.3) 50%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1rem;
+}
+.release-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 500;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    text-align: center;
+    line-height: 1.2;
+}
+.release-hint {
+    font-size: 0.7rem;
+    color: rgba(245, 245, 245, 0.8);
+    margin-top: 0.25rem;
+}
+
+/* BACK SIDE */
+.release-flip-back {
+    background: linear-gradient(135deg, rgba(17, 17, 17, 0.98) 0%, rgba(30, 30, 30, 0.98) 100%);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: 1px solid rgba(191, 160, 106, 0.2);
+}
+.release-back-title {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 0.15rem;
+    text-align: center;
+    line-height: 1.2;
+}
+.release-artist {
+    font-size: 0.7rem;
+    color: var(--muted-gold);
+    margin-bottom: 0.75rem;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* PLATFORM ICONS */
+.release-platform-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    max-width: 140px;
+}
+.platform-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(191, 160, 106, 0.08);
+    border: 2px solid rgba(191, 160, 106, 0.2);
+    transition: all 0.4s ease;
+    position: relative;
+}
+.platform-icon-link svg {
+    width: 28px;
+    height: 28px;
+    transition: all 0.4s ease;
+    z-index: 2;
+    position: relative;
+}
+
+/* GLOW EFFECT */
+.platform-icon-link::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(20px);
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+.platform-icon-link:hover::before { opacity: 0.6; }
+.platform-icon-link:hover {
+    transform: scale(1.15) translateY(-5px);
+    background: rgba(191, 160, 106, 0.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+.platform-icon-link:hover svg {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* PLATFORM COLORS */
+.spotify-icon { color: #f5f5f5; }
+.spotify-icon:hover { color: #1DB954; border-color: #1DB954; }
+.spotify-icon:hover::before { background: radial-gradient(circle, #1DB954 0%, transparent 70%); }
+
+.apple-icon { color: #f5f5f5; }
+.apple-icon:hover { color: #FA2D48; border-color: #FA2D48; }
+.apple-icon:hover::before { background: radial-gradient(circle, #FA2D48 0%, transparent 70%); }
+
+.youtube-icon { color: #f5f5f5; }
+.youtube-icon:hover { color: #FF0000; border-color: #FF0000; }
+.youtube-icon:hover::before { background: radial-gradient(circle, #FF0000 0%, transparent 70%); }
+
+.soundcloud-icon { color: #f5f5f5; }
+.soundcloud-icon:hover { color: #FF5500; border-color: #FF5500; }
+.soundcloud-icon:hover::before { background: radial-gradient(circle, #FF5500 0%, transparent 70%); }
+
+.email-icon { color: #f5f5f5; }
+.email-icon:hover { color: #D44638; border-color: #D44638; } /* Gmail red */
+.email-icon:hover::before { background: radial-gradient(circle, #D44638 0%, transparent 70%); }
+
+/* CONNECT */
+.connect-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+.connect-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg) var(--space-md);
+    border: 1px solid rgba(191, 160, 106, 0.15);
+    border-radius: var(--border-radius);
+    background: rgba(191, 160, 106, 0.02);
+    transition: var(--transition-smooth);
+    cursor: pointer;
+}
+.connect-icon {
+    width: 48px;
+    height: 48px;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.connect-text {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    transition: var(--transition-smooth);
+}
+.connect-card:hover {
+    background: rgba(191, 160, 106, 0.08);
+    border-color: var(--muted-gold);
+    transform: translateY(-5px);
+}
+.connect-card:hover .connect-icon {
+    color: var(--muted-gold);
+    transform: scale(1.15) rotate(5deg);
+}
+.connect-card:hover .connect-text { color: var(--muted-gold); }
+
+/* FOLLOW ARTISTS */
+.follow-artists-section {
+    background: linear-gradient(to bottom, transparent 0%, rgba(191, 160, 106, 0.04) 50%, transparent 100%);
+}
+.follow-artists-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+.instagram-embed-container {
+    border: 1px solid rgba(191, 160, 106, 0.2);
+    border-radius: var(--border-radius);
+    background: rgba(191, 160, 106, 0.05);
+    min-height: 200px;
+}
+
+/* FOOTER */
+.footer {
+    padding: var(--space-lg) var(--space-sm);
+    border-top: 1px solid rgba(191, 160, 106, 0.1);
+    margin-top: var(--space-xl);
+}
+.footer-text {
+    text-align: center;
+    font-size: 0.875rem;
+    color: rgba(245, 245, 245, 0.5);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .releases-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 768px) {
+    .header-content { flex-direction: column; text-align: center; }
+    .label-name { font-size: 1.75rem; }
+    .section-title { font-size: 2.5rem; }
+    .platform-icon-link { width: 45px; height: 45px; }
+    .platform-icon-link svg { width: 26px; height: 26px; }
+    .follow-artists-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+    .releases-grid {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <h1 class="label-name fascinate-regular">Change Entertainment</h1>
+                <p class="tagline">Where Entertainment brings Change ⚡️</p>
+            </div>
+            <nav class="nav">
+                <a href="#releases" class="nav-link">Releases</a>
+                <a href="#follow" class="nav-link">Follow</a>
+                <a href="#connect" class="nav-link">Connect</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="Videos/Boombox.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-glow"></div>
+    </section>
+    
+
+    <section id="releases" class="section releases-section">
+        <div class="container">
+            <h2 class="section-title">Featured Releases</h2>
+            <div class="releases-grid">
+                
+                <!-- Release 1: Love Change - 3 ICONS -->
+                <div class="release-flip-card">
+                    <div class="release-flip-inner">
+                        <div class="release-flip-front" style="background-image: url('assets/LoveChange.JPEG');">
+                            <div class="release-overlay">
+                                <span class="release-title">Love Change EP</span>
+                                <span class="release-hint">Hover to listen</span>
+                            </div>
+                        </div>
+                        <div class="release-flip-back">
+                            <h3 class="release-back-title">Love Change</h3>
+                            <p class="release-artist">Bredw1nnerr & Kiid Halo</p>
+                            <div class="release-platform-icons">
+                                <a href="https://open.spotify.com/album/0l8iFSBGzPevk1UkvOtPcZ" target="_blank" class="platform-icon-link spotify-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                                </a>
+                                <a href="https://music.apple.com/us/album/love-change-ep/1877412468" target="_blank" class="platform-icon-link apple-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.997 6.124c0-.738-.065-1.47-.24-2.19-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 0 0-1.595-.706 10.495 10.495 0 0 0-2.01-.18C17.65 0 17.424 0 12 0s-5.65 0-5.969.005a10.495 10.495 0 0 0-2.01.18 5.022 5.022 0 0 0-1.595.706C1.307 1.624.562 2.624.245 3.934a9.23 9.23 0 0 0-.24 2.19C0 6.444 0 6.675 0 12s0 5.556.005 5.876c.004.735.08 1.47.24 2.19.317 1.31 1.062 2.31 2.18 3.043a5.022 5.022 0 0 0 1.595.706c.648.137 1.316.205 2.01.18.319.005.545.005 5.969.005s5.65 0 5.969-.005a10.495 10.495 0 0 0 2.01-.18 5.022 5.022 0 0 0 1.595-.706c1.118-.733 1.863-1.733 2.18-3.043.16-.72.236-1.455.24-2.19.005-.32.005-.546.005-5.876s0-5.556-.005-5.876zM12 18.963c-3.843 0-6.963-3.12-6.963-6.963S8.157 5.037 12 5.037s6.963 3.12 6.963 6.963-3.12 6.963-6.963 6.963z"/></svg>
+                                </a>
+                                <a href="https://www.youtube.com/@CHANGEENT" target="_blank" class="platform-icon-link youtube-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Release 2: Climate Change - 3 ICONS -->
+                <div class="release-flip-card">
+                    <div class="release-flip-inner">
+                        <div class="release-flip-front" style="background-image: url('assets/ClimateChange.JPG');">
+                            <div class="release-overlay">
+                                <span class="release-title">Climate Change</span>
+                                <span class="release-hint">Hover to listen</span>
+                            </div>
+                        </div>
+                        <div class="release-flip-back">
+                            <h3 class="release-back-title">Climate Change</h3>
+                            <p class="release-artist">Kiid Halo ft E-magine & B.L.O.W</p>
+                            <div class="release-platform-icons">
+                                <a href="https://open.spotify.com/track/27q5LI9MSvvomvQlKxF2b4?si=e68e031b01524c31" target="_blank" class="platform-icon-link spotify-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                                </a>
+                                <a href="https://music.apple.com/us/song/climate-change-feat-e-magine-b-l-o-w/1875055973" target="_blank" class="platform-icon-link apple-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.997 6.124c0-.738-.065-1.47-.24-2.19-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 0 0-1.595-.706 10.495 10.495 0 0 0-2.01-.18C17.65 0 17.424 0 12 0s-5.65 0-5.969.005a10.495 10.495 0 0 0-2.01.18 5.022 5.022 0 0 0-1.595.706C1.307 1.624.562 2.624.245 3.934a9.23 9.23 0 0 0-.24 2.19C0 6.444 0 6.675 0 12s0 5.556.005 5.876c.004.735.08 1.47.24 2.19.317 1.31 1.062 2.31 2.18 3.043a5.022 5.022 0 0 0 1.595.706c.648.137 1.316.205 2.01.18.319.005.545.005 5.969.005s5.65 0 5.969-.005a10.495 10.495 0 0 0 2.01-.18 5.022 5.022 0 0 0 1.595-.706c1.118-.733 1.863-1.733 2.18-3.043.16-.72.236-1.455.24-2.19.005-.32.005-.546.005-5.876s0-5.556-.005-5.876zM12 18.963c-3.843 0-6.963-3.12-6.963-6.963S8.157 5.037 12 5.037s6.963 3.12 6.963 6.963-3.12 6.963-6.963 6.963z"/></svg>
+                                </a>
+                                <a href="https://www.youtube.com/@CHANGEENT" target="_blank" class="platform-icon-link youtube-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Release 3: Paul Bunyan - 2 ICONS -->
+                <div class="release-flip-card">
+                    <div class="release-flip-inner">
+                        <div class="release-flip-front" style="background-image: url('assets/PaulBunyan.JPG');">
+                            <div class="release-overlay">
+                                <span class="release-title">Paul Bunyan</span>
+                                <span class="release-hint">Hover to listen</span>
+                            </div>
+                        </div>
+                        <div class="release-flip-back">
+                            <h3 class="release-back-title">Paul Bunyan</h3>
+                            <p class="release-artist">Kiid Halo ft E-magine & B.L.O.W</p>
+                            <div class="release-platform-icons">
+                                <a href="https://open.spotify.com/track/1QKPBp54WqdUMVS7j5qH4y?si=f6ba95f7ca47480d" target="_blank" class="platform-icon-link spotify-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                                </a>
+                                <a href="https://music.apple.com/us/song/paul-bunyan-feat-e-magine-b-l-o-w/1866439132" target="_blank" class="platform-icon-link apple-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.997 6.124c0-.738-.065-1.47-.24-2.19-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 0 0-1.595-.706 10.495 10.495 0 0 0-2.01-.18C17.65 0 17.424 0 12 0s-5.65 0-5.969.005a10.495 10.495 0 0 0-2.01.18 5.022 5.022 0 0 0-1.595.706C1.307 1.624.562 2.624.245 3.934a9.23 9.23 0 0 0-.24 2.19C0 6.444 0 6.675 0 12s0 5.556.005 5.876c.004.735.08 1.47.24 2.19.317 1.31 1.062 2.31 2.18 3.043a5.022 5.022 0 0 0 1.595.706c.648.137 1.316.205 2.01.18.319.005.545.005 5.969.005s5.65 0 5.969-.005a10.495 10.495 0 0 0 2.01-.18 5.022 5.022 0 0 0 1.595-.706c1.118-.733 1.863-1.733 2.18-3.043.16-.72.236-1.455.24-2.19.005-.32.005-.546.005-5.876s0-5.556-.005-5.876zM12 18.963c-3.843 0-6.963-3.12-6.963-6.963S8.157 5.037 12 5.037s6.963 3.12 6.963 6.963-3.12 6.963-6.963 6.963z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Release 4-6: Placeholder cards with 4 icons each -->
+                <div class="release-flip-card">
+                    <div class="release-flip-inner">
+                        <div class="release-flip-front" style="background-image: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop');">
+                            <div class="release-overlay">
+                                <span class="release-title">Song Title 4</span>
+                                <span class="release-hint">Hover to listen</span>
+                            </div>
+                        </div>
+                        <div class="release-flip-back">
+                            <h3 class="release-back-title">Song Title 4</h3>
+                            <p class="release-artist">Artist Name</p>
+                            <div class="release-platform-icons">
+                                <a href="#" target="_blank" class="platform-icon-link spotify-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                                </a>
+                                <a href="#" target="_blank" class="platform-icon-link apple-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.997 6.124c0-.738-.065-1.47-.24-2.19-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 0 0-1.595-.706 10.495 10.495 0 0 0-2.01-.18C17.65 0 17.424 0 12 0s-5.65 0-5.969.005a10.495 10.495 0 0 0-2.01.18 5.022 5.022 0 0 0-1.595.706C1.307 1.624.562 2.624.245 3.934a9.23 9.23 0 0 0-.24 2.19C0 6.444 0 6.675 0 12s0 5.556.005 5.876c.004.735.08 1.47.24 2.19.317 1.31 1.062 2.31 2.18 3.043a5.022 5.022 0 0 0 1.595.706c.648.137 1.316.205 2.01.18.319.005.545.005 5.969.005s5.65 0 5.969-.005a10.495 10.495 0 0 0 2.01-.18 5.022 5.022 0 0 0 1.595-.706c1.118-.733 1.863-1.733 2.18-3.043.16-.72.236-1.455.24-2.19.005-.32.005-.546.005-5.876s0-5.556-.005-5.876zM12 18.963c-3.843 0-6.963-3.12-6.963-6.963S8.157 5.037 12 5.037s6.963 3.12 6.963 6.963-3.12 6.963-6.963 6.963z"/></svg>
+                                </a>
+                                <a href="#" target="_blank" class="platform-icon-link youtube-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                                </a>
+                                <a href="#" target="_blank" class="platform-icon-link soundcloud-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c0-.057-.045-.1-.09-.1m6.912-2.731c-.835 0-1.617.192-2.32.534a5.666 5.666 0 0 0-.113-1.028 1.313 1.313 0 0 0-1.29-1.054c-.144 0-.28.024-.413.07-.663.226-1.118.867-1.118 1.615v8.76c0 .014.011.026.024.032.014.005 10.394.005 10.394.005a3.562 3.562 0 0 0 3.557-3.557 3.562 3.562 0 0 0-3.557-3.557"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="release-flip-card">
+                    <div class="release-flip-inner">
+                        <div class="release-flip-front" style="background-image: url('https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&h=600&fit=crop');">
+                            <div class="release-overlay">
+                                <span class="release-title">Song Title 5</span>
+                                <span class="release-hint">Hover to listen</span>
+                            </div>
+                        </div>
+                        <div class="release-flip-back">
+                            <h3 class="release-back-title">Song Title 5</h3>
+                            <p class="release-artist">Artist Name</p>
+                            <div class="release-platform-icons">
+                                <a href="#" target="_blank" class="platform-icon-link spotify-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                                </a>
+                                <a href="#" target="_blank" class="platform-icon-link apple-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.997 6.124c0-.738-.065-1.47-.24-2.19-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 0 0-1.595-.706 10.495 10.495 0 0 0-2.01-.18C17.65 0 17.424 0 12 0s-5.65 0-5.969.005a10.495 10.495 0 0 0-2.01.18 5.022 5.022 0 0 0-1.595.706C1.307 1.624.562 2.624.245 3.934a9.23 9.23 0 0 0-.24 2.19C0 6.444 0 6.675 0 12s0 5.556.005 5.876c.004.735.08 1.47.24 2.19.317 1.31 1.062 2.31 2.18 3.043a5.022 5.022 0 0 0 1.595.706c.648.137 1.316.205 2.01.18.319.005.545.005 5.969.005s5.65 0 5.969-.005a10.495 10.495 0 0 0 2.01-.18 5.022 5.022 0 0 0 1.595-.706c1.118-.733 1.863-1.733 2.18-3.043.16-.72.236-1.455.24-2.19.005-.32.005-.546.005-5.876s0-5.556-.005-5.876zM12 18.963c-3.843 0-6.963-3.12-6.963-6.963S8.157 5.037 12 5.037s6.963 3.12 6.963 6.963-3.12 6.963-6.963 6.963z"/></svg>
+                                </a>
+                                <a href="#" target="_blank" class="platform-icon-link youtube-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                                </a>
+                                <a href="#" target="_blank" class="platform-icon-link soundcloud-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c0-.057-.045-.1-.09-.1m6.912-2.731c-.835 0-1.617.192-2.32.534a5.666 5.666 0 0 0-.113-1.028 1.313 1.313 0 0 0-1.29-1.054c-.144 0-.28.024-.413.07-.663.226-1.118.867-1.118 1.615v8.76c0 .014.011.026.024.032.014.005 10.394.005 10.394.005a3.562 3.562 0 0 0 3.557-3.557 3.562 3.562 0 0 0-3.557-3.557"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="release-flip-card">
+                    <div class="release-flip-inner">
+                        <div class="release-flip-front" style="background-image: url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=600&h=600&fit=crop');">
+                            <div class="release-overlay">
+                                <span class="release-title">Song Title 6</span>
+                                <span class="release-hint">Hover to listen</span>
+                            </div>
+                        </div>
+                        <div class="release-flip-back">
+                            <h3 class="release-back-title">Song Title 6</h3>
+                            <p class="release-artist">Artist Name</p>
+                            <div class="release-platform-icons">
+                                <a href="#" target="_blank" class="platform-icon-link spotify-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                                </a>
+                                <a href="#" target="_blank" class="platform-icon-link apple-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.997 6.124c0-.738-.065-1.47-.24-2.19-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 0 0-1.595-.706 10.495 10.495 0 0 0-2.01-.18C17.65 0 17.424 0 12 0s-5.65 0-5.969.005a10.495 10.495 0 0 0-2.01.18 5.022 5.022 0 0 0-1.595.706C1.307 1.624.562 2.624.245 3.934a9.23 9.23 0 0 0-.24 2.19C0 6.444 0 6.675 0 12s0 5.556.005 5.876c.004.735.08 1.47.24 2.19.317 1.31 1.062 2.31 2.18 3.043a5.022 5.022 0 0 0 1.595.706c.648.137 1.316.205 2.01.18.319.005.545.005 5.969.005s5.65 0 5.969-.005a10.495 10.495 0 0 0 2.01-.18 5.022 5.022 0 0 0 1.595-.706c1.118-.733 1.863-1.733 2.18-3.043.16-.72.236-1.455.24-2.19.005-.32.005-.546.005-5.876s0-5.556-.005-5.876zM12 18.963c-3.843 0-6.963-3.12-6.963-6.963S8.157 5.037 12 5.037s6.963 3.12 6.963 6.963-3.12 6.963-6.963 6.963z"/></svg>
+                                </a>
+                                <a href="#" target="_blank" class="platform-icon-link youtube-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                                </a>
+                                <a href="#" target="_blank" class="platform-icon-link soundcloud-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c0-.057-.045-.1-.09-.1m6.912-2.731c-.835 0-1.617.192-2.32.534a5.666 5.666 0 0 0-.113-1.028 1.313 1.313 0 0 0-1.29-1.054c-.144 0-.28.024-.413.07-.663.226-1.118.867-1.118 1.615v8.76c0 .014.011.026.024.032.014.005 10.394.005 10.394.005a3.562 3.562 0 0 0 3.557-3.557 3.562 3.562 0 0 0-3.557-3.557"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="follow" class="section follow-artists-section">
+        <div class="container">
+            <h2 class="section-title">Follow the Artists</h2>
+            <p class="section-intro">Stay updated with their latest content on Instagram.</p>
+            <div class="follow-artists-grid">
+    
+                <!-- Artist 1: Bredw1nnerr -->
+                <div class="instagram-embed-container">
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/bredw1nnerr/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:100%;">
+                        <div style="padding:16px;">
+                            <a href="https://www.instagram.com/bredw1nnerr/?utm_source=ig_embed&amp;utm_campaign=loading" style="text-align:center; text-decoration:none; width:100%;" target="_blank">
+                                View this profile on Instagram
+                            </a>
+                        </div>
+                    </blockquote>
+                </div>
+    
+                <!-- Artist 2: Kiid Halo -->
+                <div class="instagram-embed-container">
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/kiid_halo/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:100%;">
+                        <div style="padding:16px;">
+                            <a href="https://www.instagram.com/kiid_halo/?utm_source=ig_embed&amp;utm_campaign=loading" style="text-align:center; text-decoration:none; width:100%;" target="_blank">
+                                View this profile on Instagram
+                            </a>
+                        </div>
+                    </blockquote>
+                </div>
+                
+                <div class="instagram-embed-container">
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/kiid_halo/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:100%;">
+                        <div style="padding:16px;">
+                            <a href="https://www.instagram.com/kiid_halo/?utm_source=ig_embed&amp;utm_campaign=loading" style="text-align:center; text-decoration:none; width:100%;" target="_blank">
+                                View this profile on Instagram
+                            </a>
+                        </div>
+                    </blockquote>
+                </div>
+    
+            </div>
+        </div>
+    </section>
+    
+    <!-- Instagram embed script (only once per page) -->
+    <script async src="//www.instagram.com/embed.js"></script>
+    
+
+    <section id="connect" class="section">
+        <div class="container">
+            <h2 class="section-title">Connect with Change Entertainment</h2>
+            <div class="connect-grid">
+                <a href="https://www.instagram.com/changee.n.t.__/" target="_blank" class="connect-card">
+                    <svg class="connect-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    <span class="connect-text">Instagram</span>
+                </a>
+    
+                <a href="https://www.youtube.com/@changeent" target="_blank" class="connect-card">
+                    <svg class="connect-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    <span class="connect-text">YouTube</span>
+                </a>
+    
+                <a href="https://soundcloud.com/bredwinnerrr" target="_blank" class="connect-card">
+                    <svg class="connect-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c0-.057-.045-.1-.09-.1m6.912-2.731c-.835 0-1.617.192-2.32.534a5.666 5.666 0 0 0-.113-1.028 1.313 1.313 0 0 0-1.29-1.054c-.144 0-.28.024-.413.07-.663.226-1.118.867-1.118 1.615v8.76c0 .014.011.026.024.032.014.005 10.394.005 10.394.005a3.562 3.562 0 0 0 3.557-3.557 3.562 3.562 0 0 0-3.557-3.557"/></svg>
+                    <span class="connect-text">SoundCloud</span>
+                </a>
+    
+                <a href="mailto:changege33@gmail.com" class="connect-card">
+                    <svg class="connect-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 13.065L.5 4.5v15h23v-15l-11.5 8.565zm0-2.13l11.5-8.565H.5l11.5 8.565z"/>
+                    </svg>
+                    <span class="connect-text">Book Us</span>
+                </a>  
+    
+            </div>
+        </div>
+    </section>
+    
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">© 2026 Change Entertainment</p>
+        </div>
+    </footer>
+</body>
+</html>
