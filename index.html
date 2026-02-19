@@ -458,15 +458,21 @@ a { color: inherit; text-decoration: none; }
     gap: var(--space-lg);
     margin-top: var(--space-lg);
 }
+/* Center lone 4th embed in the middle column */
+.follow-artists-grid .instagram-embed-container:last-child:nth-child(3n + 1) {
+    grid-column: 2;
+}
 .instagram-embed-container {
     border: 1px solid rgba(191, 160, 106, 0.18);
     border-radius: var(--border-radius);
     background: rgba(191, 160, 106, 0.04);
-    min-height: 200px;
+    min-height: 450px;
     overflow: hidden;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
 }
 .instagram-embed-container:hover {
     border-color: rgba(191, 160, 106, 0.35);
@@ -476,6 +482,8 @@ a { color: inherit; text-decoration: none; }
     width: 100% !important;
     min-width: unset !important;
     max-width: 100% !important;
+    margin: 0 !important;
+    flex-shrink: 0;
 }
 
 /* ── FOOTER ── */
@@ -533,7 +541,7 @@ a { color: inherit; text-decoration: none; }
     .platform-icon-link { width: 45px; height: 45px; }
     .platform-icon-link svg { width: 26px; height: 26px; }
     .follow-artists-grid { grid-template-columns: 1fr; }
-    .instagram-embed-container .instagram-media { min-width: unset !important; }
+    .follow-artists-grid .instagram-embed-container:last-child:nth-child(3n + 1) { grid-column: 1; }
     .footer .container { flex-direction: column; text-align: center; }
 }
 @media (max-width: 600px) {
